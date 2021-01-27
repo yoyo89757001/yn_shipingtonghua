@@ -23,7 +23,6 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
     var dataSource : [BBModel] = []
     
     
-  
      
     // 重现statusBar相关方法
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -35,6 +34,11 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
         super.viewDidLoad()
         view.backgroundColor=UIColor.init(hexString: "ffffff")
         print(Defaults.topbarHeight,"状态栏高度")
+        
+        if Defaults.password == "" {//跳转到登录界面
+            let logvc = Logging()
+            self.navigationController?.pushViewController(logvc, animated: true)
+        }
         
         let tgp = UITapGestureRecognizer.init() //手势监听事件
         tgp.delegate=self; //手势监听事件

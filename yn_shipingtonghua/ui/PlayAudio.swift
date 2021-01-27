@@ -25,6 +25,11 @@ class PlayAudio: UIViewController, TRTCCloudDelegate {
     let timeLB = UILabel()
     var codeTimer : DispatchSourceTimer?
     
+    // 重现statusBar相关方法
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIStatusBarStyle.lightContent
+    }
+    
     
     /// 从摄像头采样
     private var isFrontCamera: Bool = true
@@ -117,8 +122,8 @@ class PlayAudio: UIViewController, TRTCCloudDelegate {
     
     
     override func viewWillAppear(_ animated: Bool) {
-           self.navigationController?.setNavigationBarHidden(true, animated: false)
            super.viewWillAppear(animated)
+           self.navigationController?.setNavigationBarHidden(true, animated: false)
             // 隐藏导航栏 true 有动画
             /// 开启麦克风采集
             trtcCloud.startLocalAudio(TRTCAudioQuality(rawValue: 2)!)
