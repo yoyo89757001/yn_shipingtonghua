@@ -3,10 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4250BDFF362C179215AB6672 /* Pods_yn_shipingtonghua.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D3A69190F7E2AE4F81F143E /* Pods_yn_shipingtonghua.framework */; };
+		8F620E1F25BFF30B0042C243 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F620E1E25BFF30B0042C243 /* CollectionViewCell.swift */; };
+		8F620E2F25BFF8300042C243 /* BBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F620E2E25BFF8300042C243 /* BBModel.swift */; };
+		8F620E3225BFF9440042C243 /* PlayAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F620E3125BFF9440042C243 /* PlayAudio.swift */; };
+		8F620EA425C02EA60042C243 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F620EA325C02EA60042C243 /* Accelerate.framework */; };
+		8F620EBF25C036550042C243 /* GenerateTestUserSig.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F620EBE25C036550042C243 /* GenerateTestUserSig.m */; };
+		8F620EC325C037570042C243 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F620EC125C037000042C243 /* libc++.tbd */; };
+		8F620EDD25C0FA390042C243 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F620EDC25C0FA390042C243 /* DateUtils.swift */; };
+		8F620EE325C1516F0042C243 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F620EE225C1516F0042C243 /* PaddingLabel.swift */; };
+		8FB6601C25BEB2E8002E4FAB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6601B25BEB2E8002E4FAB /* Utils.swift */; };
+		8FB6602B25BEC907002E4FAB /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6602A25BEC907002E4FAB /* Logging.swift */; };
+		8FB6603325BF9B34002E4FAB /* VUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6603225BF9B34002E4FAB /* VUtils.swift */; };
 		8FDD24AD25BE706F006AB4A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD24AC25BE706F006AB4A3 /* AppDelegate.swift */; };
 		8FDD24AF25BE706F006AB4A3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD24AE25BE706F006AB4A3 /* SceneDelegate.swift */; };
 		8FDD24B125BE706F006AB4A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FDD24B025BE706F006AB4A3 /* ViewController.swift */; };
@@ -16,6 +28,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13788FDC14A027A136DCDD3F /* Pods-yn_shipingtonghua.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn_shipingtonghua.release.xcconfig"; path = "Target Support Files/Pods-yn_shipingtonghua/Pods-yn_shipingtonghua.release.xcconfig"; sourceTree = "<group>"; };
+		4D3A69190F7E2AE4F81F143E /* Pods_yn_shipingtonghua.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_yn_shipingtonghua.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F620E1E25BFF30B0042C243 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		8F620E2E25BFF8300042C243 /* BBModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBModel.swift; sourceTree = "<group>"; };
+		8F620E3125BFF9440042C243 /* PlayAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayAudio.swift; sourceTree = "<group>"; };
+		8F620EA325C02EA60042C243 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		8F620EBC25C036550042C243 /* yn_shipingtonghua-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "yn_shipingtonghua-Bridging-Header.h"; sourceTree = "<group>"; };
+		8F620EBD25C036550042C243 /* GenerateTestUserSig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GenerateTestUserSig.h; sourceTree = "<group>"; };
+		8F620EBE25C036550042C243 /* GenerateTestUserSig.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenerateTestUserSig.m; sourceTree = "<group>"; };
+		8F620EC125C037000042C243 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		8F620EDC25C0FA390042C243 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
+		8F620EE225C1516F0042C243 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		8FB6601B25BEB2E8002E4FAB /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		8FB6602A25BEC907002E4FAB /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		8FB6603225BF9B34002E4FAB /* VUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VUtils.swift; sourceTree = "<group>"; };
 		8FDD24A925BE706F006AB4A3 /* yn_shipingtonghua.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yn_shipingtonghua.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FDD24AC25BE706F006AB4A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8FDD24AE25BE706F006AB4A3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +51,7 @@
 		8FDD24B525BE7070006AB4A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8FDD24B825BE7070006AB4A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8FDD24BA25BE7070006AB4A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F08E340A6CC6925FE81695CC /* Pods-yn_shipingtonghua.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-yn_shipingtonghua.debug.xcconfig"; path = "Target Support Files/Pods-yn_shipingtonghua/Pods-yn_shipingtonghua.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +59,80 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F620EC325C037570042C243 /* libc++.tbd in Frameworks */,
+				4250BDFF362C179215AB6672 /* Pods_yn_shipingtonghua.framework in Frameworks */,
+				8F620EA425C02EA60042C243 /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1D971175436BECF0EC92B99A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8F620EC125C037000042C243 /* libc++.tbd */,
+				8F620EA325C02EA60042C243 /* Accelerate.framework */,
+				4D3A69190F7E2AE4F81F143E /* Pods_yn_shipingtonghua.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8F620E1D25BFF2E60042C243 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				8F620E1E25BFF30B0042C243 /* CollectionViewCell.swift */,
+			);
+			path = cells;
+			sourceTree = "<group>";
+		};
+		8F620E2225BFF6140042C243 /* modle */ = {
+			isa = PBXGroup;
+			children = (
+				8F620E2E25BFF8300042C243 /* BBModel.swift */,
+			);
+			path = modle;
+			sourceTree = "<group>";
+		};
+		8F620EE125C151390042C243 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				8F620EE225C1516F0042C243 /* PaddingLabel.swift */,
+			);
+			path = views;
+			sourceTree = "<group>";
+		};
+		8FB6601725BEB298002E4FAB /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				8FB6601B25BEB2E8002E4FAB /* Utils.swift */,
+				8FB6603225BF9B34002E4FAB /* VUtils.swift */,
+				8F620EDC25C0FA390042C243 /* DateUtils.swift */,
+				8F620EBD25C036550042C243 /* GenerateTestUserSig.h */,
+				8F620EBE25C036550042C243 /* GenerateTestUserSig.m */,
+				8F620EBC25C036550042C243 /* yn_shipingtonghua-Bridging-Header.h */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
+		8FB6602925BEC84A002E4FAB /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				8F620E1D25BFF2E60042C243 /* cells */,
+				8FDD24B025BE706F006AB4A3 /* ViewController.swift */,
+				8FB6602A25BEC907002E4FAB /* Logging.swift */,
+				8F620E3125BFF9440042C243 /* PlayAudio.swift */,
+			);
+			path = ui;
+			sourceTree = "<group>";
+		};
 		8FDD24A025BE706F006AB4A3 = {
 			isa = PBXGroup;
 			children = (
 				8FDD24AB25BE706F006AB4A3 /* yn_shipingtonghua */,
 				8FDD24AA25BE706F006AB4A3 /* Products */,
+				B93B0FC97EE931444A2D87A0 /* Pods */,
+				1D971175436BECF0EC92B99A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +147,27 @@
 		8FDD24AB25BE706F006AB4A3 /* yn_shipingtonghua */ = {
 			isa = PBXGroup;
 			children = (
+				8F620EE125C151390042C243 /* views */,
+				8F620E2225BFF6140042C243 /* modle */,
+				8FB6602925BEC84A002E4FAB /* ui */,
+				8FB6601725BEB298002E4FAB /* utils */,
 				8FDD24AC25BE706F006AB4A3 /* AppDelegate.swift */,
 				8FDD24AE25BE706F006AB4A3 /* SceneDelegate.swift */,
-				8FDD24B025BE706F006AB4A3 /* ViewController.swift */,
 				8FDD24B225BE706F006AB4A3 /* Main.storyboard */,
 				8FDD24B525BE7070006AB4A3 /* Assets.xcassets */,
 				8FDD24B725BE7070006AB4A3 /* LaunchScreen.storyboard */,
 				8FDD24BA25BE7070006AB4A3 /* Info.plist */,
 			);
 			path = yn_shipingtonghua;
+			sourceTree = "<group>";
+		};
+		B93B0FC97EE931444A2D87A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F08E340A6CC6925FE81695CC /* Pods-yn_shipingtonghua.debug.xcconfig */,
+				13788FDC14A027A136DCDD3F /* Pods-yn_shipingtonghua.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +177,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8FDD24BD25BE7070006AB4A3 /* Build configuration list for PBXNativeTarget "yn_shipingtonghua" */;
 			buildPhases = (
+				A65910D0F7FB85BCA360DA18 /* [CP] Check Pods Manifest.lock */,
 				8FDD24A525BE706F006AB4A3 /* Sources */,
 				8FDD24A625BE706F006AB4A3 /* Frameworks */,
 				8FDD24A725BE706F006AB4A3 /* Resources */,
+				0CB082FF301329DAE2166982 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -98,6 +203,7 @@
 				TargetAttributes = {
 					8FDD24A825BE706F006AB4A3 = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1230;
 					};
 				};
 			};
@@ -132,14 +238,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0CB082FF301329DAE2166982 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-yn_shipingtonghua/Pods-yn_shipingtonghua-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-yn_shipingtonghua/Pods-yn_shipingtonghua-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-yn_shipingtonghua/Pods-yn_shipingtonghua-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A65910D0F7FB85BCA360DA18 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-yn_shipingtonghua-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8FDD24A525BE706F006AB4A3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F620EE325C1516F0042C243 /* PaddingLabel.swift in Sources */,
 				8FDD24B125BE706F006AB4A3 /* ViewController.swift in Sources */,
+				8FB6602B25BEC907002E4FAB /* Logging.swift in Sources */,
+				8FB6603325BF9B34002E4FAB /* VUtils.swift in Sources */,
+				8F620EBF25C036550042C243 /* GenerateTestUserSig.m in Sources */,
+				8F620E1F25BFF30B0042C243 /* CollectionViewCell.swift in Sources */,
 				8FDD24AD25BE706F006AB4A3 /* AppDelegate.swift in Sources */,
+				8F620EDD25C0FA390042C243 /* DateUtils.swift in Sources */,
+				8F620E3225BFF9440042C243 /* PlayAudio.swift in Sources */,
+				8F620E2F25BFF8300042C243 /* BBModel.swift in Sources */,
 				8FDD24AF25BE706F006AB4A3 /* SceneDelegate.swift in Sources */,
+				8FB6601C25BEB2E8002E4FAB /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,11 +440,15 @@
 		};
 		8FDD24BE25BE7070006AB4A3 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F08E340A6CC6925FE81695CC /* Pods-yn_shipingtonghua.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 36S9LMQ7ZN;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = yn_shipingtonghua/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -295,18 +456,24 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.yinian.menkou.ynshipingtonghua.yn-shipingtonghua";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "yn_shipingtonghua/utils/yn_shipingtonghua-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		8FDD24BF25BE7070006AB4A3 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 13788FDC14A027A136DCDD3F /* Pods-yn_shipingtonghua.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 36S9LMQ7ZN;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = yn_shipingtonghua/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -314,8 +481,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.example.yinian.menkou.ynshipingtonghua.yn-shipingtonghua";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "yn_shipingtonghua/utils/yn_shipingtonghua-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
