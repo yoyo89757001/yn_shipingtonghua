@@ -266,6 +266,7 @@ class PlayAudio: UIViewController, TRTCCloudDelegate {
         if codeTimer != nil {
             codeTimer?.cancel()
             codeTimer = nil
+            self.navigationController?.popViewController(animated: true)
         }
     }
     

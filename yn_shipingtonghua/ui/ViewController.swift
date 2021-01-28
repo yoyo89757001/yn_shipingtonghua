@@ -247,7 +247,7 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
                // 隐藏导航栏 true 有动画
         popview?.hideWith(animated: false)
         print("视图将要显示")
-        qmuiTip = QMUITips.showLoading("登录中...", in: self.view)
+        qmuiTip = QMUITips.showLoading("加载中...", in: self.view)
         get_link()
         
        }
@@ -292,11 +292,11 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
                encoder: JSONParameterEncoder.default,
                headers: [HTTPHeader(name: "token", value: Defaults.token ?? "")]).responseString { response in
                 print("返回值",response.value!)
-                do{
-                    let handyModel = try JSONDecoder().decode([BBModel].self, from: response.data ?? Data())
-                    print(handyModel.isEmpty)
                     DispatchQueue.main.async {
+                    do{
                         self.qmuiTip?.hide(animated: true)
+                        let handyModel = try JSONDecoder().decode([BBModel].self, from: response.data ?? Data())
+                        print(handyModel.isEmpty)
                         self.dataSource=[]
                         if handyModel.isEmpty{
                             self.kongBox.isHidden = false //空数据
@@ -304,17 +304,15 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
                             self.kongBox.isHidden = true
                             for item in handyModel {
                                 self.dataSource.append(item)
-
                             }
                          }
                         self.collectionView?.reloadData()
                         //self.collectionView!.es.stopPullToRefresh()
                         self.ref.endRefreshing()
-                    }
                 }catch{
                     print(error,"错误")
                 }
-             
+            }
                
         }
     }
