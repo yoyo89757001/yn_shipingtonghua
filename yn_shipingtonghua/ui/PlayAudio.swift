@@ -21,9 +21,16 @@ class PlayAudio: UIViewController, TRTCCloudDelegate {
     let switchCameraBtn = UIButton()
     var userId:String="123456"
     var roomId:UInt32=12333
-    var time:Int64=0
+    var time:TimeInterval=0
     let timeLB = UILabel()
     var codeTimer : DispatchSourceTimer?
+    var shengyin = UIButton()
+    var fanzhuang = UIButton()
+    var bb1 = true;
+    var bb2 = true;
+    var bb3 = true;
+
+    
     
     // 重现statusBar相关方法
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -51,11 +58,20 @@ class PlayAudio: UIViewController, TRTCCloudDelegate {
         view.addSubview(playVideoView)
         view.addSubview(localVideoView)
         view.addSubview(timeLB)
-        
+        view.addSubview(shengyin)
+        view.addSubview(fanzhuang)
+
         timeLB.textColor=UIColor.white
         timeLB.font=UIFont.systemFont(ofSize: 18)
         playVideoView.backgroundColor=UIColor.black
-        
+        let closeImg = VUtils.Button(view: view, name: "guaduanbg", top: 0, left: 0, bottom: 0, right: 0)
+        shengyin.setImage(UIImage.init(named: "maikefbf"), for: UIControl.State.normal)
+        fanzhuang.setImage(UIImage.init(named: "ffttyy"), for: UIControl.State.normal)
+
+        closeImg.addTarget(self, action: #selector(touchUpInsideFn), for: UIControl.Event.touchUpInside)
+        shengyin.addTarget(self, action: #selector(touchUpInsideFn2), for: UIControl.Event.touchUpInside)
+        fanzhuang.addTarget(self, action: #selector(touchUpInsideFn3), for: UIControl.Event.touchUpInside)
+
         localVideoView.snp.makeConstraints { (make) in
               make.top.equalToSuperview().offset(Defaults.topbarHeight+50)
               make.right.equalToSuperview().offset(-10)
@@ -73,11 +89,34 @@ class PlayAudio: UIViewController, TRTCCloudDelegate {
               make.centerX.equalToSuperview()
           }
         
+        closeImg.snp.makeConstraints { (make) in
+              make.centerX.equalToSuperview()
+              make.bottom.equalToSuperview().offset(-UIScreen.main.bounds.size.height*0.16)
+              make.width.equalTo(UIScreen.main.bounds.size.width*0.18)
+              make.height.equalTo(UIScreen.main.bounds.size.width*0.18)
+          }
+        shengyin.snp.makeConstraints { (make) in
+            make.centerY.equalTo(closeImg.snp.centerY)
+            make.right.equalTo(closeImg.snp.left).offset(-UIScreen.main.bounds.size.width*0.1)
+              make.width.equalTo(UIScreen.main.bounds.size.width*0.18)
+              make.height.equalTo(UIScreen.main.bounds.size.width*0.18)
+          }
+        fanzhuang.snp.makeConstraints { (make) in
+            make.centerY.equalTo(closeImg.snp.centerY)
+            make.left.equalTo(closeImg.snp.right).offset(UIScreen.main.bounds.size.width*0.1)
+              make.width.equalTo(UIScreen.main.bounds.size.width*0.18)
+              make.height.equalTo(UIScreen.main.bounds.size.width*0.18)
+          }
+        
         /**
          * 设置参数，进入视频通话房间
          * 房间号param.roomId，当前用户id param.userId
          * param.role 指定以什么角色进入房间（anchor主播，audience观众）
          */
+        
+        print("传入的\(userId)","playAudios")
+        print("传入的\(roomId)","playAudios")
+        
         let param = TRTCParams.init()
         param.sdkAppId = UInt32(SDKAppID)
         param.roomId   = roomId
@@ -106,18 +145,16 @@ class PlayAudio: UIViewController, TRTCCloudDelegate {
         
         /// 调整仪表盘显示位置
         trtcCloud.setDebugViewMargin(userId, margin: TXEdgeInsets.init(top: 80, left: 0, bottom: 0, right: 0))
-        
-        
+
         let queue = DispatchQueue.global()
                     codeTimer = DispatchSource.makeTimerSource(queue: queue)
                     codeTimer?.schedule(wallDeadline: .now(), repeating: .seconds(1))
                     codeTimer?.setEventHandler { [weak self] in
                         DispatchQueue.main.async(execute: {
-                            self?.calculateTime(timeInterval: 1611899999)
+                            self?.calculateTime(timeInterval: self?.time ?? 0)
                         })
                     }
                     codeTimer?.resume()
-        
     }
     
     
@@ -129,15 +166,22 @@ class PlayAudio: UIViewController, TRTCCloudDelegate {
             trtcCloud.startLocalAudio(TRTCAudioQuality(rawValue: 2)!)
             /// 开启摄像头采集
             trtcCloud.startLocalPreview(isFrontCamera, view: localVideoView)
-            
        }
     
+    func onExitRoom(_ reason: Int) {
+        print("退出房间\(reason)","playAudios")
+    }
+    func onEnterRoom(_ result: Int) {
+        print("加入房间\(result)","playAudios")
+    }
     
     /**
      * 当前视频通话房间里的其他用户开启/关闭摄像头时会收到这个回调
      * 此时可以根据这个用户的视频available状态来 “显示或者关闭” Ta的视频画面
      */
     func onUserVideoAvailable(_ userId: String, available: Bool) {
+        print("userId\(userId)","playAudios")
+        print("available\(available)","playAudios")
         let index = remoteUids.index(of: userId)
         if available {
             guard NSNotFound == index else { return }
@@ -152,11 +196,36 @@ class PlayAudio: UIViewController, TRTCCloudDelegate {
         }
     }
     
+    func onFirstVideoFrame(_ userId: String, streamType: TRTCVideoStreamType, width: Int32, height: Int32) {
+        print("eeeeee", "开始渲染本地或远程用户的首帧画面。");
+        if bb3 {
+            bb3=false
+            if remoteUids.count == 0 {
+                let alertController = UIAlertController(title: "温馨提示",
+                                                            message: "对方未在线,请稍等或联系客服", preferredStyle: .alert)
+
+                    //let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+                    let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+                        action in
+                       
+                        self.trtcCloud.exitRoom()
+                        self.navigationController?.popViewController(animated: true)
+                        alertController.dismiss(animated: true, completion: nil);
+                        
+                    })
+                    alertController.addAction(okAction)
+                    //alertController.addAction(cancelAction)
+                    self.present(alertController, animated: true, completion: nil)
+            }
+        }
+    }
+    
     
     func refreshRemoteVideoViews(from: Int) {
         for i in from..<remoteUids.count {
             let remoteUid = remoteUids[i] as! String
             /// 开始显示用户remoteUid的视频画面
+            print("开始显示用户\(remoteUid)的视频画面","playAudios")
             trtcCloud.startRemoteView(remoteUid, streamType: TRTCVideoStreamType.big,view: playVideoView)
         }
     }
@@ -200,6 +269,49 @@ class PlayAudio: UIViewController, TRTCCloudDelegate {
         }
     }
     
+    @objc //挂断
+    func touchUpInsideFn() {
+        let alertController = UIAlertController(title: "温馨提示",
+                                                message: "确定要退出聊天吗？", preferredStyle: .alert)
+
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+            let okAction = UIAlertAction(title: "确定", style: .default, handler: {
+                action in
+               
+                self.trtcCloud.exitRoom()
+                self.navigationController?.popViewController(animated: true)
+                alertController.dismiss(animated: true, completion: nil);
+                
+            })
+            alertController.addAction(okAction)
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    @objc //声音
+    func touchUpInsideFn2() {
+        if bb1 {
+            bb1=false
+            shengyin.setImage(UIImage.init(named: "jinyingbg"), for: .normal)
+            trtcCloud.stopLocalAudio()
+        }else{
+            bb1=true
+            shengyin.setImage(UIImage.init(named: "maikefbf"), for: .normal)
+            trtcCloud.startLocalAudio(TRTCAudioQuality(rawValue: 2)!)
+        }
+    }
+    
+    
+    @objc //翻转
+    func touchUpInsideFn3() {
+        trtcCloud.switchCamera()
+        if isFrontCamera {
+            isFrontCamera = false;
+        }else{
+            isFrontCamera=true
+        }
+    }
     
     // 当视图将要消失时调用该方法
         override func viewWillDisappear(_ animated: Bool) {

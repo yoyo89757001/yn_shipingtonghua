@@ -5,12 +5,13 @@
 //  Created by 陈军 on 2021/1/26.
 //
 
-import HandyJSON
 
-class BBModel: HandyJSON {
-    required init() {}
-    var errno = ""
-    var msg = ""
-    var uid = ""
-    var pass = ""
+
+struct BBModel :Codable{
+    var roomName : String?
+    var elderName : String?
+    var visitTime : String?
+    var userCode : String?
+    var startTime : String?
+    var endTime : String?
 }

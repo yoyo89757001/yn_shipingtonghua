@@ -10,6 +10,7 @@ import SwiftyUserDefaults
 import SnapKit
 import QMUIKit
 import ESPullToRefresh
+import Alamofire
 
 
 //主界面
@@ -21,7 +22,11 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
     var style: UIStatusBarStyle = .lightContent
     var collectionView : UICollectionView?
     var dataSource : [BBModel] = []
-    
+    var qmuiTip : QMUITips? =  nil
+    let kongBox = UIView()
+    let kongLabel = UILabel()
+    let kongImg = UIImageView()
+    let ref = UIRefreshControl()
     
      
     // 重现statusBar相关方法
@@ -43,23 +48,29 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
         let tgp = UITapGestureRecognizer.init() //手势监听事件
         tgp.delegate=self; //手势监听事件
         self.view.addGestureRecognizer(tgp) //手势监听事件
-        
-        let mod = BBModel()
-        mod.errno="AA"
-        mod.uid="123"
-        mod.msg="ffff"
-        dataSource.append(mod)
-        dataSource.append(mod)
-        dataSource.append(mod)
-        dataSource.append(mod)
+             
+        NotificationCenter.default.addObserver(self, selector: #selector(becomeActive), name: UIApplication.didBecomeActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(becomeDeath), name: UIApplication.willResignActiveNotification, object: nil)
         
         initview();
        
     }
+    
+    @objc
+    func becomeDeath(){
+        print("前台到后台")
+        
+    }
+    
+    @objc
+    func becomeActive(){
+        print("后台到前台")
+        qmuiTip = QMUITips.showLoading("登录中...", in: self.view)
+        get_link()
+    }
 
     //手势监听事件
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
-        
         if (touch.view!.isDescendant(of: self.collectionView!)) {
             if popview!.isHidden {//如果popview是隐藏的，不拦截点击事件,否则相反
                 return false;
@@ -79,8 +90,8 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
         setupUICollection()
 
         let title = VUtils.Label(view: topBox, text: "远程探视", color: "FFFFFF", size: 18)
-         butt = VUtils.Button(view: topBox, name: "san2", top: 10, left: 10, bottom: 10, right: 10)
-         butt!.addTarget(self, action: #selector(touchUpInsideFn), for: UIControl.Event.touchUpInside)
+        butt = VUtils.Button(view: topBox, name: "san2", top: 10, left: 10, bottom: 10, right: 10)
+        butt!.addTarget(self, action: #selector(touchUpInsideFn), for: UIControl.Event.touchUpInside)
        
         topBox.snp.makeConstraints { (make) in
             make.top.equalToSuperview()
@@ -110,11 +121,34 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
         item1.image=UIImage.init(named: "tuichu")?.reSizeImage(reSize: CGSize(width: 22, height: 22))
         popview!.items=[item1]
         popview!.sourceView=butt
-//        popview!.didHideBlock = {(hidesByUserTap:Bool)->Void in
+//         popview!.didHideBlock = {(hidesByUserTap:Bool)->Void in
 //            print(hidesByUserTap)
 //        }
         view.addSubview(popview!)
-       
+        kongBox.addSubview(kongImg)
+        kongBox.addSubview(kongLabel)
+        view.addSubview(kongBox)
+        kongBox.isHidden = false
+        kongImg.image=UIImage.init(named: "zwsjbg")
+        kongLabel.text="暂无数据";kongLabel.textColor=UIColor.init(hexString: "dddddd")
+        kongBox.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+         }
+        kongImg.snp.makeConstraints { (make) in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
+            make.width.equalTo(100)
+            make.height.equalTo(100)
+         }
+        kongLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(kongImg.snp.bottom).offset(8)
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        kongBox.isHidden=true
+        ref.tintColor=UIColor.init(hexString: "ff3e2b")
+        
 //        let tap = UITapGestureRecognizer.init(target: self, action: #selector(tapView))
 //        view.addGestureRecognizer(tap)
 
@@ -132,6 +166,9 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
           collectionView!.bounces = true
           collectionView!.showsVerticalScrollIndicator = false
           collectionView!.bouncesZoom = true
+          
+        
+          collectionView!.refreshControl = ref
           collectionView!.backgroundColor = UIColor.init(hexString: "ffffff")
           view.addSubview(collectionView!)
           collectionView!.snp.makeConstraints { (make) in
@@ -141,21 +178,26 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
                 make.bottom.equalToSuperview()
             }
         
-        self.collectionView!.es.addPullToRefresh {
-            [unowned self] in
-            /// 在这里做刷新相关事件
-            print("刷新了")
-            /// 如果你的刷新事件成功，设置completion自动重置footer的状态
-            self.collectionView!.es.stopPullToRefresh()
-            /// 设置ignoreFooter来处理不需要显示footer的情况
-            //self.collectionView!.es.stopPullToRefresh(completion: true, ignoreFooter: false)
-        }
+//        self.collectionView!.es.addPullToRefresh {
+//            [unowned self] in
+//            /// 在这里做刷新相关事件
+//            print("刷新了")
+//            get_link()
+//            /// 如果你的刷新事件成功，设置completion自动重置footer的状态
+//            //   self.collectionView!.es.stopPullToRefresh()
+//            /// 设置ignoreFooter来处理不需要显示footer的情况
+//            //self.collectionView!.es.stopPullToRefresh(completion: true, ignoreFooter: false)
+//        }
+        ref.addTarget(self, action: #selector(shuaxin), for: UIControl.Event.valueChanged)
        
-        
     }
     
     
-
+    @objc
+    func shuaxin() {
+        print("刷新")
+        get_link()
+    }
     
     
     @objc func touchUpInsideFn() {
@@ -165,7 +207,6 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
         }else{
             popview?.hideWith(animated: true)
         }
-        
      }
     
     @objc func tc_tapView() {
@@ -185,17 +226,18 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
            let data = dataSource[indexPath.row]
         cell.imageView.image = UIImage(named: "a11");
-        cell.name.text=data.msg
-        cell.times.text=data.errno+"\("AA\nbb")"
-        cell.kaishi.addTarget(self, action: #selector(touchUpTanShi), for: UIControl.Event.touchUpInside)
+        cell.name.text=(data.elderName ?? "") + " " + (data.roomName ?? "")
+        let ttm=data.visitTime?.split(separator: " ")[0]
+        let sss = "探视时间:\(ttm ?? "")\n" + "\(data.startTime ?? "")至\(data.endTime ?? "")"
+        cell.times.text = sss
+        cell.kaishi.tag=indexPath.row
+        cell.kaishi.addTarget(self, action: #selector(touchUpTanShi(sender:)),for: UIControl.Event.touchUpInside)
         return cell
        }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //点击跳转界面
         print("item被点击")
-        let vc = PlayAudio()
-        self.navigationController?.pushViewController(vc, animated: true)
+        
         
     }
     
@@ -204,14 +246,78 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
            super.viewWillAppear(animated)
                // 隐藏导航栏 true 有动画
         popview?.hideWith(animated: false)
+        print("视图将要显示")
+        qmuiTip = QMUITips.showLoading("登录中...", in: self.view)
+        get_link()
         
        }
     
+    
+    
     @objc
-    func touchUpTanShi() {
-        print("点击了探视")
+    func touchUpTanShi(sender:UIButton) {
+        print("点击了探视",sender.tag)
+        print(Defaults.phone?.suffix(10).description ?? "")
+        let vc = PlayAudio()
+        vc.roomId=UInt32(dataSource[sender.tag].userCode ?? "0") ?? 0
+        vc.userId=Defaults.phone?.suffix(10).description ?? ""
+        print("截取的时间",dataSource[sender.tag].visitTime?.split(separator: " ")[0] ?? "")
+        let aadd = dataSource[sender.tag].visitTime?.split(separator: " ")[0] ?? ""
+        let str  = aadd + " " + (dataSource[sender.tag].endTime ?? "")
+        print(str)
+        let time = str.timeStrChangeTotimeInterval("yyyy-MM-dd HH:mm")
+        print("time == \(time)")
+        vc.time = TimeInterval(time) ?? 0
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
+    
+    func get_link(){
+       
+        struct Login: Encodable {
+            let pageNum: String
+            let pageSize: String
+            let params: Params
+        }
+        struct Params: Encodable {
+          
+        }
+        
+        let login = Login(pageNum: "1",pageSize: "200", params: Params())
+             //JSONParameterEncoder.default //URLEncodedFormParameterEncoder.default
+             AF.request(URL+"/app/elder/getElderInfoByAppoint",
+               method: .post,
+               parameters: login,
+               encoder: JSONParameterEncoder.default,
+               headers: [HTTPHeader(name: "token", value: Defaults.token ?? "")]).responseString { response in
+                print("返回值",response.value!)
+                do{
+                    let handyModel = try JSONDecoder().decode([BBModel].self, from: response.data ?? Data())
+                    print(handyModel.isEmpty)
+                    DispatchQueue.main.async {
+                        self.qmuiTip?.hide(animated: true)
+                        self.dataSource=[]
+                        if handyModel.isEmpty{
+                            self.kongBox.isHidden = false //空数据
+                         }else{
+                            self.kongBox.isHidden = true
+                            for item in handyModel {
+                                self.dataSource.append(item)
+
+                            }
+                         }
+                        self.collectionView?.reloadData()
+                        //self.collectionView!.es.stopPullToRefresh()
+                        self.ref.endRefreshing()
+                    }
+                }catch{
+                    print(error,"错误")
+                }
+             
+               
+        }
+    }
 
 }
 
