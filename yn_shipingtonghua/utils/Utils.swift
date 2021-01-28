@@ -9,11 +9,15 @@
 import Foundation
 import SwiftyUserDefaults
 
+let URL = "http://39.108.253.88:8082"
+
 extension DefaultsKeys {
-    var nicheng: DefaultsKey<String?> { .init("nicheng",defaultValue: "") }
+    var phone: DefaultsKey<String?> { .init("phone",defaultValue: "") }
+    var token: DefaultsKey<String?> { .init("token",defaultValue: "") }
+    var headUrl: DefaultsKey<String?> { .init("headUrl",defaultValue: "") }
     var username: DefaultsKey<String?> { .init("username",defaultValue: "") }
     var password: DefaultsKey<String?> { .init("password",defaultValue: "") }
-    var topbarHeight: DefaultsKey<Int> { .init("topbarHeight",defaultValue:10)}
+    var topbarHeight: DefaultsKey<Int> { .init("topbarHeight",defaultValue:26)}
     var launchCount: DefaultsKey<Int> { .init("launchCount", defaultValue: 0) }
     var checkbox: DefaultsKey<Bool> { .init("checkbox", defaultValue: true) }
     var isLogin: DefaultsKey<Bool> { .init("isLogin", defaultValue: false) }

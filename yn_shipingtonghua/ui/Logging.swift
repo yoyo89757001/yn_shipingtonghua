@@ -9,7 +9,8 @@ import Foundation
 import UIKit
 import SwiftyUserDefaults
 import SnapKit
-
+import Alamofire
+import QMUIKit
 
 
 //登录界面
@@ -20,7 +21,7 @@ class Logging: UIViewController {
     let et1 = UITextField()
     let et2 = UITextField()
     let denglu = UIButton()
-    
+    var qmuiTip : QMUITips? =  nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +62,8 @@ class Logging: UIViewController {
         denglu.setTitleColor(UIColor.gray, for: .highlighted)
         denglu.layer.cornerRadius = 6
         denglu.layer.masksToBounds = true
+        denglu.addTarget(self, action: #selector(dengluTouch), for: UIControl.Event.touchUpInside)
+        
        
         topbox.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(CGFloat(Defaults.topbarHeight) + widthS*0.12)
@@ -106,6 +109,10 @@ class Logging: UIViewController {
             make.right.equalToSuperview().offset(-widthS*0.2)
             make.height.equalTo(44)
         }
+        
+        if Defaults.phone != "" {
+            et1.text=Defaults.phone
+        }
     }
 
     
@@ -115,6 +122,73 @@ class Logging: UIViewController {
            self.navigationController?.setNavigationBarHidden(true, animated: false)
         
        }
+    
+    func loging_link(){
+        qmuiTip = QMUITips.showLoading("登录中...", in: self.view)
+        struct Login: Encodable {
+            let phone: String
+            let password: String
+            let deviceType: String //设备类型 2
+            let deviceId: String //唯一id
+            let deviceBrand: String
+            let appBuild: String
+        }
+        let login = Login(phone: et1.text!,password: et2.text!, deviceType: "2",deviceId: "",deviceBrand: "",appBuild: "")
+             //JSONParameterEncoder.default //URLEncodedFormParameterEncoder.default
+             AF.request(URL+"/api/nurse/familyLogin",
+               method: .post,
+               parameters: login,
+               encoder: JSONParameterEncoder.default).responseString { response in
+                print("返回值",response.value!)
+                struct ResultModel :Codable{
+                    var nurseName : String?
+                    var headImg : String?
+                    var nurseCode : String?
+                    var token : String?
+                }
+                struct myDate : Codable{
+                    var success : Bool?
+                    var result :ResultModel?
+                    var errorMsg : String?
+                }
+                do{
+                    let handyModel = try JSONDecoder().decode(myDate.self, from: response.data ?? Data())
+                    print("username:" , handyModel.success ?? false)
+                    // print("password:",handyModel.errorMsg)
+                     //Defaults.password = ""
+                     DispatchQueue.main.async {
+                         self.qmuiTip?.hide(animated: true)
+                        if handyModel.success ?? false {
+                            Defaults.password = self.et2.text
+                            Defaults.phone = self.et1.text
+                            Defaults.token = handyModel.result?.token
+                            Defaults.headUrl = handyModel.result?.headImg
+                            Defaults.username = handyModel.result?.nurseName
+                            self.navigationController?.popViewController(animated: true)
+
+                         }else{
+                             QMUITips.showInfo(handyModel.errorMsg, in: self.view)
+                         }
+                             
+                             
+                    }
+                }catch{
+                    print(error,"错误")
+                }
+             
+               
+        }
+    }
+ 
+    
+    @objc
+    func dengluTouch() {
+        if et1.text=="" || et2.text==""{
+            QMUITips.showInfo("请输入完整信息", in: self.view)
+            return
+        }
+        loging_link()
+    }
     
     @objc
     func maxTouch()  {

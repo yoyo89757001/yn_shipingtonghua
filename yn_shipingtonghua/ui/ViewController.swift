@@ -171,6 +171,8 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
     @objc func tc_tapView() {
         print("你点击了退出按钮")
         popview?.hideWith(animated: true)
+        let loggingvc = Logging()
+        navigationController?.pushViewController(loggingvc, animated: true)
         
      }
     

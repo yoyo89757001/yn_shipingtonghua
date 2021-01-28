@@ -16,6 +16,7 @@
 		8F620EC325C037570042C243 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F620EC125C037000042C243 /* libc++.tbd */; };
 		8F620EDD25C0FA390042C243 /* DateUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F620EDC25C0FA390042C243 /* DateUtils.swift */; };
 		8F620EE325C1516F0042C243 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F620EE225C1516F0042C243 /* PaddingLabel.swift */; };
+		8F620EE725C23B6E0042C243 /* LoggingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F620EE625C23B6E0042C243 /* LoggingModel.swift */; };
 		8FB6601C25BEB2E8002E4FAB /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6601B25BEB2E8002E4FAB /* Utils.swift */; };
 		8FB6602B25BEC907002E4FAB /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6602A25BEC907002E4FAB /* Logging.swift */; };
 		8FB6603325BF9B34002E4FAB /* VUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FB6603225BF9B34002E4FAB /* VUtils.swift */; };
@@ -40,6 +41,7 @@
 		8F620EC125C037000042C243 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		8F620EDC25C0FA390042C243 /* DateUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtils.swift; sourceTree = "<group>"; };
 		8F620EE225C1516F0042C243 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
+		8F620EE625C23B6E0042C243 /* LoggingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingModel.swift; sourceTree = "<group>"; };
 		8FB6601B25BEB2E8002E4FAB /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		8FB6602A25BEC907002E4FAB /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		8FB6603225BF9B34002E4FAB /* VUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VUtils.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				8F620E2E25BFF8300042C243 /* BBModel.swift */,
+				8F620EE625C23B6E0042C243 /* LoggingModel.swift */,
 			);
 			path = modle;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				8F620EE325C1516F0042C243 /* PaddingLabel.swift in Sources */,
 				8FDD24B125BE706F006AB4A3 /* ViewController.swift in Sources */,
 				8FB6602B25BEC907002E4FAB /* Logging.swift in Sources */,
+				8F620EE725C23B6E0042C243 /* LoggingModel.swift in Sources */,
 				8FB6603325BF9B34002E4FAB /* VUtils.swift in Sources */,
 				8F620EBF25C036550042C243 /* GenerateTestUserSig.m in Sources */,
 				8F620E1F25BFF30B0042C243 /* CollectionViewCell.swift in Sources */,
